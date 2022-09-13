@@ -15,7 +15,7 @@ function multiply(operand1, operand2) {
 }
 
 function divide(operand1, operand2) {
-    return operand1 / operand2;
+    return (operand1 / operand2).toFixed(2);
 }
 
 function operate(operand1, operand2, operator) {
@@ -37,11 +37,13 @@ function operate(operand1, operand2, operator) {
 let equals = document.querySelector('#equals');
 
 equals.addEventListener('click', function() {
-    console.log('Calculating ' + operand1 + ' ' + operator + ' ' + display);
+    if(operand1 !== null && operator !== null && display != 0) {
+    console.log('Calculating ' + operand1 + ' ' + operator + ' ' + display);    
 
     displayContent = operate(operand1, display, operator);
     display = displayContent;
     addNumberToDisplay(displayContent);
+    }
 });
 
 let workingDisplay = document.querySelector('#display');
@@ -56,7 +58,10 @@ let numbers = document.querySelectorAll('.number');
 numbers.forEach(button => button.addEventListener('click', function(e) {
     console.log('Number ' +  this.textContent + ' clicked');
 
-    if(display === 0) {
+    if(display == 0 && this.textContent == 0) {
+        console.log('here bu ');
+    }
+    else if(display === 0) {
         display = this.textContent;
     } else {
         display = display + this.textContent; 
